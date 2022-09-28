@@ -445,14 +445,10 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "try.l"
-/* 
-    Aprendendo a usar o flex
- */
-#line 6 "try.l"
-/* need this for the call to getlogin() below */
+#line 2 "try.l"
 #include <unistd.h>
-#line 454 "lex.yy.c"
-#line 455 "lex.yy.c"
+#line 450 "lex.yy.c"
+#line 451 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -669,9 +665,9 @@ YY_DECL
 		}
 
 	{
-#line 10 "try.l"
+#line 5 "try.l"
 
-#line 674 "lex.yy.c"
+#line 670 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -730,15 +726,15 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "try.l"
+#line 6 "try.l"
 printf("%s\n", getlogin());
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 12 "try.l"
+#line 7 "try.l"
 ECHO;
 	YY_BREAK
-#line 741 "lex.yy.c"
+#line 737 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1743,7 +1739,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 12 "try.l"
+#line 7 "try.l"
 
 
 main()
