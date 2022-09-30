@@ -1,68 +1,70 @@
+/*
+Compilador de C--
+Universidade de Brasília
+Departamento de Ciência da Computação
+Compiladores - CIC000 - 2022/1 A
+Prof. Dr. Germana
+Desenvolvido por
+	Bruno Sanguinetti Regadas de Barros - 18/0046063
+	Caio Bernardon N. K. Massucato - 16/0115001
+    Caroline Ferreira Pinto - 16/0067766
+*/
+
+
+/* 
+    Permite retirar as chamadas ao yywrap e main 
+    Veja: https://www.ime.usp.br/~kon/MAC211/2002/lista/msg00071.html
+*/
+%option noyywrap
+
+/* Declarações */
 %{
 #include <stdio.h>
+void getToken(void);
 %}
 
 
-keyword IF|ELSE|WHILE|INT|VOID|RETURN
-
-sum [+]
-sub [-]
-mul [*]
-div [/]
-assig [:][=]
-lesserEqual [<=]
-lesser [<]
-greater [>]
-
-
+/* Definicoes e Regex 
+   comment está zoado
+*/
 digit       [0-9]
+number      {digit}+
 letter      [a-zA-Z]
-id          {letter}+
-intcon      {digit}+
+identifier  {letter}+
+newline     [\n]
+whitespace  [ ]
+whitespaces {whitespace}+
+comment ["(/*")([^*/)])*("*/)]"{1}
 
-whitespace  [\t]+
-newline     [\n]+
 
-
-charcon     {letter}+
-stringcon   {charcon}+
-
+/* 
+    Dúvida whitespace, como contabilizar? 
+    É pra ser assim mesmo?
+*/
 %%
-{keyword} {fprintf(yyout,"[keyword: %s]\n",yytext);}
-{sum} {fprintf(yyout,"[sum: %s]\n",yytext);}
-{sub} {fprintf(yyout,"[sub: %s]\n",yytext);}
-{mul} {fprintf(yyout,"[mul: %s]\n",yytext);}
-{div} {fprintf(yyout,"[div: %s]\n",yytext);}
-{assig} {fprintf(yyout,"[assig: %s]\n",yytext);}
-{lesser} {fprintf(yyout,"[lesser: %s]\n",yytext);}
-{greater} {fprintf(yyout,"[greater: %s]\n",yytext);}
-{lesserEqual} {fprintf(yyout,"[lesserEqual: %s]\n",yytext);}
-{intcon} {fprintf(yyout,"[intcon: %s]\n",yytext);}
-{id} {fprintf(yyout,"[id: %s]\n",yytext);}
-{whitespace} {fprintf(yyout,"[whitespace: %s]\n",yytext);}
-{newline} {fprintf(yyout,"[newline: %s]\n",yytext);}
+"if"              {getToken();}
+"else"            {getToken();}
+"="               {getToken();}
+"<"               {getToken();}
+">"               {getToken();}
+"<="              {getToken();}
+">="              {getToken();}
+"+"               {getToken();}
+"-"               {getToken();}
+"*"               {getToken();}
+"/"               {getToken();}
+"("               {getToken();}
+")"               {getToken();}
+";"               {getToken();}
+{number}          {getToken();}
+{identifier}      {getToken();}
+{whitespace}      {getToken();}
+{whitespaces}     {getToken();}
+{comment}         {getToken();}
 %%
 
-int yywrap ();
-
-main(argc, argv)
- int argc;
- char **argv;
-    {
-	++argv; --argc;
-	if(argc > 0)
-		yyin = fopen(argv[0],"rt");
-	else
-		yyin = stdin; 
-	if(argc > 1)
-		yyout = fopen(argv[1],"wt");
-	else
-		yyout = stdout;
-	yylex();
-	fclose(yyin);
-	fclose(yyout);
-    }
-
-int yywrap() {
-	return 1;
+/* Funcao de Teste */
+void getToken(void)
+{ 
+    printf("INPUT\n");
 }
